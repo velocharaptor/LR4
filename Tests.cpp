@@ -39,7 +39,7 @@ void SearchElemTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1, cmp v2, cm
 }
 
 void GetLengthTesting(Three<int> &root, Three<cmp> cmp_root){
-    if(root.GetLength() == 5){
+    if(root.GetLength() == 3){
         cout << "GetLengthTesting<int> - OK\n";
     }
     else{
@@ -106,8 +106,12 @@ bool F2Sr(cmp x){
 void ThreeTesting(){
     Three<int> root;
     Three<int> root2;
+    Three<int> root3;
+    Three<int> concat_root2;
     Three<cmp> cmp_root;
     Three<cmp> cmp_root2;
+    Three<cmp> cmp_concat_root2;
+    Three<cmp> cmp_root3;
     cmp v1(5, 3), v2(7, 1), v3(3, 2);
     cmp v21(16, 30), v22(48, 14), v23(5, 12);
     Three<int> map_root;
@@ -127,6 +131,17 @@ void ThreeTesting(){
     root2.Add(7);
     root2.Add(6);
     root2.Add(8);
+    //===================== <int3>
+    root3.Add(7);
+    root3.Add(6);
+    root3.Add(8);
+    root3.Add(4);
+    root3.Add(5);
+    root3.Add(2);
+    //===================== <int concat>
+    concat_root2.Add(7);
+    concat_root2.Add(6);
+    concat_root2.Add(8);
     //===================== <complex>
     cmp_root.Add(v1);
     cmp_root.Add(v2);
@@ -135,6 +150,17 @@ void ThreeTesting(){
     cmp_root2.Add(v21);
     cmp_root2.Add(v22);
     cmp_root2.Add(v23);
+    //===================== <complex3>
+    cmp_root3.Add(v21);
+    cmp_root3.Add(v22);
+    cmp_root3.Add(v23);
+    cmp_root3.Add(v1);
+    cmp_root3.Add(v2);
+    cmp_root3.Add(v3);
+    //===================== <complex concat>
+    cmp_concat_root2.Add(v21);
+    cmp_concat_root2.Add(v22);
+    cmp_concat_root2.Add(v23);
     //===================== <where1>
     where_root1.Add(-2);
     where_root1.Add(-1);
@@ -168,6 +194,21 @@ void ThreeTesting(){
     SearchElemTesting(root, cmp_root, v1, v2, v3);
     GetLengthTesting(root, cmp_root);
     GetTesting(root, cmp_root, v1);
+    // ===================== Concat tests
+    root.Concat(concat_root2);
+    if(concat_root2 == root3){
+        cout << "ConcatTesting<int> - OK\n";
+    }
+    else{
+        cout << "ConcatTesting<int> - NO\n";
+    }
+    cmp_root.Concat(cmp_concat_root2);
+    if(cmp_concat_root2 == cmp_root3){
+        cout << "ConcatTesting<cmp> - OK\n";
+    }
+    else{
+        cout << "ConcatTesting<cmp> - NO\n";
+    }
     //===================== Maps tests
     root.Map(F1Int1);
     if(root == res_root){
@@ -198,14 +239,12 @@ void ThreeTesting(){
     else{
         cout << "WhereTesting<cmp> - NO\n";
     }
-    //===================== Concat tests
-    //root.Concat(root2);
-    //string key = "RootLeftRight";
-    //root2.Print(key);
+
     //ExtractingSubThreeTesting(root, sub_root);
 }
 
 void Tests(){
     cout << "Start testing Three:\n\n";
     ThreeTesting();
+    cout << "\n";
 }
