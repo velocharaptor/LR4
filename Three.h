@@ -32,13 +32,13 @@ private:
         }
     }
 
-   /* void concat(NodeThree<T>** node1, NodeThree<T>** node2){
+    void concat(NodeThree<T>** node1, NodeThree<T>** node2){
         if(*node1){
-            (*node2)->Add((*node1)->Get(), &(*node2));
+            (*node2)->Add((*node1)->GetV(), &(*node2));
             concat(&(*node1)->left, &(*node2));
             concat(&(*node1)->right, &(*node2));
         }
-    } */
+    }
 public:
     Three(){
         root = nullptr;
@@ -50,7 +50,7 @@ public:
     }
 
     T Get(){
-        return root->Get();
+        return root->GetV();
     }
 
     void GetString(string &key, T** res){
@@ -82,9 +82,9 @@ public:
         where(a, root, f2);
     }
 
-   /* void Concat(Three<T> &a){
+    void Concat(Three<T> &a){
         concat(&root, &a.root);
-    } */
+    }
 
     void ExtractingSubThree(Three<T> &a, T value){
         if(root){
@@ -92,7 +92,7 @@ public:
         }
     }
 
-    void Print(string &key)const{
+    void Print(int key)const{
         if(root){
             root->Print(key);
         }
