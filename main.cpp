@@ -282,8 +282,9 @@ int main() {
                             cout << "time:" << res_time/1000.0 << endl;
                             break;
                         case 3:
-                            cout << "Enter elem: ";
-                            cin >> x;
+                            //cout << "Enter elem: ";
+                            //cin >> x;
+                            x = 432;
                             start_time = clock();
                             suicide_root.Add(x);
                             end_time = clock();
@@ -291,8 +292,9 @@ int main() {
                             cout << "time:" << res_time/1000.0 << endl;
                             break;
                         case 4:
-                            cout << "Enter elem: ";
-                            cin >> x;
+                            //cout << "Enter elem: ";
+                            //cin >> x;
+                            x = 432;
                             start_time = clock();
                             if(suicide_root.SearchElem(x)){
                                 cout << "Elem " << x << " is finding.\n";
@@ -314,18 +316,20 @@ int main() {
                         case 6:
                             start_time = clock();
                             suicide_root.Where(F2Otr, suicide_root2);
-                            suicide_root2.Print(4);
+                            //suicide_root2.Print(4);
                             end_time = clock();
                             res_time = end_time - start_time;
                             cout << "time:" << res_time/1000.0 << endl;
                             break;
                         case 7:
                             cout << "Enter length second three:";
-                            cin >> n;
-                            cout << "Enter elem:\n";
+                            //cin >> n;
+                            n = 1000;
+                           // cout << "Enter elem:\n";
                             for(int i = 0; i < n; i++){
-                                cout << "[" << i << "]:";
-                                cin >> x;
+                                //cout << "[" << i << "]:";
+                                //cin >> x;
+                                x = rand()%n;
                                 suicide_concat_root3.Add(x);
                             }
                             start_time = clock();
@@ -333,19 +337,20 @@ int main() {
                             end_time = clock();
                             res_time = end_time - start_time;
                             cout << "time:" << res_time/1000.0 << endl;
-                            cout << "Concat tree:\n";
-                            suicide_concat_root3.Print(4);
+                            //cout << "Concat tree:\n";
+                            //suicide_concat_root3.Print(4);
                             break;
                         case 8:
                             cout << "Enter elem fo sub three:";
-                            cin >> x;
+                            //cin >> x;
+                            x = 432;
                             start_time = clock();
                             suicide_root.ExtractingSubThree(suicide_sub_root, x);
                             end_time = clock();
                             res_time = end_time - start_time;
                             cout << "time:" << res_time/1000.0 << endl;
-                            cout << "Sub Three:\n\n";
-                            suicide_sub_root.Print(4);
+                            //cout << "Sub Three:\n\n";
+                            //suicide_sub_root.Print(4);
                             break;
                         case 9:
                             cout << "Choose a bypass option:\n"
@@ -356,7 +361,8 @@ int main() {
                                     "-5.RightLeftRoot\n"
                                     "-6.RightRootLeft\n"
                                     "=>";
-                            cin >> key;
+                            //cin >> key;
+                            key = 4;
                             start_time = clock();
                             suicide_root.Print(key);
                             end_time = clock();
