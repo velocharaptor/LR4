@@ -5,11 +5,14 @@
 #include <functional>
 #include <cstring>
 #include "Complex.h"
+#include <cstdio>
+//#include "Three.h"
 
 using namespace std;
 
 template<class T> class NodeThree{
-protected:
+    //friend class Three;
+private:
     //T value;
     //NodeThree* left;
     //NodeThree* right;
@@ -22,67 +25,79 @@ public:
         left = right = nullptr;
     }
 
-    T Get(){
+    T GetV(){
         return value;
     }
 
-    void RootLeftRight()const{
-        cout << value << endl;
+    void RootLeftRight(int n)const{
+        for(int i = 0; i < n; i++)
+            cout << "  ";
+        cout <<  value;
         if(left){
-            left->RootLeftRight();
+            left->RootLeftRight(n+1);
         }
         if(right){
-            right->RootLeftRight();
+            right->RootLeftRight(n+1);
         }
     }
 
-    void RootRightLeft()const{
+    void RootRightLeft(int n)const{
+        for(int i = 0; i < n; i++)
+            cout << "  ";
         cout << value << endl;
         if(right){
-            right->RootRightLeft();
+            right->RootRightLeft(n+1);
         }
         if(left){
-            left->RootRightLeft();
+            left->RootRightLeft(n+1);
         }
     }
 
-    void LeftRightRoot()const{
+    void LeftRightRoot(int n)const{
         if(left){
-            left->LeftRightRoot();
+            left->LeftRightRoot(n+1);
         }
         if(right){
-            right->LeftRightRoot();
+            right->LeftRightRoot(n+1);
         }
+        for(int i = 0; i < n; i++)
+            cout << "  ";
         cout << value << endl;
     }
 
-    void LeftRootRight()const{
+    void LeftRootRight(int n)const{
         if(left){
-            left->LeftRootRight();
+            left->LeftRootRight(n+1);
         }
+        for(int i = 0; i < n; i++)
+            cout << "  ";
         cout << value << endl;
         if(right){
-            right->LeftRootRight();
+            right->LeftRootRight(n+1);
         }
     }
 
-    void RightLeftRoot()const{
+    void RightLeftRoot(int n)const{
         if(right){
-            right->RightLeftRoot();
+            right->RightLeftRoot(n+1);
         }
         if(left){
-            left->RightLeftRoot();
+            left->RightLeftRoot(n+1);
         }
+        for(int i = 0; i < n; i++)
+            cout << "  ";
         cout << value << endl;
     }
 
-    void RightRootLeft()const{
+    void RightRootLeft(int n)const{
         if(right){
-            right->RightRootLeft();
+            right->RightRootLeft(n+1);
         }
+        for(int i = 0; i < n; i++)
+            cout << "  ";
         cout << value << endl;
         if(left){
-            left->RightRootLeft();
+            left->RightRootLeft(n+1);
         }
     }
 
@@ -92,7 +107,7 @@ public:
             (*node)->value = new_value;
             (*node)->right = (*node)->left = nullptr;
         }
-        if((*node)->value > new_value){
+        if(new_value < (*node)->value){
             if((*node)->left != nullptr){
                 Add(new_value, &(*node)->left);
             }
@@ -102,7 +117,7 @@ public:
                 (*node)->left->value = new_value;
             }
         }
-        if((*node)->value < new_value){
+        if(new_value > (*node)->value){
             if((*node)->right != nullptr){
                 Add(new_value, &(*node)->right);
             }
@@ -132,27 +147,30 @@ public:
         return false;
     }
 
-    NodeThree<T>* SubThree(NodeThree<T> **node, T subvalue){
+    NodeThree<T>* SubThree(NodeThree<T>** node, T subvalue){
         if ( (*node) ){
             if ( ((*node)->value) == subvalue){
                 return (*node);
             }
             else {
-                if (value < (*node)->value) {
+                if (subvalue < (*node)->value) {
                     return SubThree(&(*node)->left, subvalue);
-                } else {
-                    if (value > (*node)->value) {
+                }
+                else {
+                    if (subvalue > (*node)->value) {
                         return SubThree(&(*node)->right, subvalue);
                     }
                 }
             }
         }
-        return nullptr;
+        else {
+            return nullptr;
+        }
     }
 
     void ExtractingSubThree(NodeThree<T>** node1, NodeThree<T>** node2, T subvalue){
         if(SubThree(&(*node1), subvalue) != nullptr){
-            (*node2) = SubThree(&(*node1), value);
+            (*node2) = SubThree(&(*node1), subvalue);
         }
     }
 
@@ -235,45 +253,46 @@ public:
         }
     }
 
-    void Line(string &key, NodeThree* node, T** res, int* i){
-        if(key  == "RootLeftRight"){
+    void Line(int key, NodeThree* node, T** res, const int* i){
+        if(key  == 1){
             RootLeftRight(node, &(*res), &(*i));
         }
-        if(key == "RootRightLeft"){
+        if(key == 2){
             RootRightLeft(node, &(*res), &(*i));
         }
-        if(key == "LeftRightRoot"){
+        if(key == 3){
             LeftRightRoot(node, &(*res), &(*i));
         }
-        if(key == "LeftRootRight"){
+        if(key == 4){
             LeftRootRight(node, &(*res), &(*i));
         }
-        if(key == "RightLeftRoot"){
+        if(key == 5){
             RightLeftRoot(node, &(*res), &(*i));
         }
-        if(key == "RightRootLeft"){
+        if(key == 6){
             RightRootLeft(node, &(*res), &(*i));
         }
     }
 
-    void Print(string &key)const{
-        if(key  == "RootLeftRight"){
-            RootLeftRight();
+    void Print(int key)const{
+        int n = 0;
+        if(key  == 1){
+            RootLeftRight(n);
         }
-        if(key == "RootRightLeft"){
-            RootRightLeft();
+        if(key == 2){
+            RootRightLeft(n);
         }
-        if(key == "LeftRightRoot"){
-            LeftRightRoot();
+        if(key == 3){
+            LeftRightRoot(n);
         }
-        if(key == "LeftRootRight"){
-            LeftRootRight();
+        if(key == 4){
+            LeftRootRight(n);
         }
-        if(key == "RightLeftRoot"){
-            RightLeftRoot();
+        if(key == 5){
+            RightLeftRoot(n);
         }
-        if(key == "RightRootLeft"){
-            RightRootLeft();
+        if(key == 6){
+            RightRootLeft(n);
         }
     }
 
@@ -287,3 +306,4 @@ public:
 };
 
 #endif //LR3_NODETHREE_H
+
