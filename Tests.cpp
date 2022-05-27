@@ -8,7 +8,7 @@
 
 using namespace std;
 
-void AddTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1, cmp v2, cmp v3){
+void AddTesting(Three<int> &root, Three<cmp> &cmp_root, cmp v1, cmp v2, cmp v3){
   if(root.SearchElem(4) && (root.SearchElem(2)) && (root.SearchElem(5))){
       cout << "AddTesting<int> - OK\n";
   }
@@ -23,7 +23,7 @@ void AddTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1, cmp v2, cmp v3){
     }
 }
 
-void SearchElemTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1, cmp v2, cmp v3){
+void SearchElemTesting(Three<int> &root, Three<cmp> &cmp_root, cmp v1, cmp v2, cmp v3){
     if(root.SearchElem(4) && (root.SearchElem(5)) && (root.SearchElem(2))){
         cout << "SearchElemTesting<int> - OK\n";
     }
@@ -38,7 +38,7 @@ void SearchElemTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1, cmp v2, cm
     }
 }
 
-void GetLengthTesting(Three<int> &root, Three<cmp> cmp_root){
+void GetLengthTesting(Three<int> &root, Three<cmp> &cmp_root){
     if(root.GetLength() == 3){
         cout << "GetLengthTesting<int> - OK\n";
     }
@@ -53,7 +53,7 @@ void GetLengthTesting(Three<int> &root, Three<cmp> cmp_root){
     }
 }
 
-void GetTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1){
+void GetTesting(Three<int> &root, Three<cmp> &cmp_root, cmp v1){
     if(root.Get() == 4){
         cout << "GetTesting<int> - OK\n";
     }
@@ -68,8 +68,21 @@ void GetTesting(Three<int> &root, Three<cmp> cmp_root, cmp v1){
     }
 }
 
-void ExtractingSubThreeTesting(Three<int> &root, Three<int> &sub_root){
-    root.ExtractingSubThree(sub_root, 2);
+void ExtractingSubThreeTesting(Three<int> &sub_root1, Three<int> &sub_root, Three<cmp> &cmp_sub_root, Three<cmp> &cmp_sub_root1, cmp v1, cmp v2, cmp v3, cmp v21){
+    sub_root1.ExtractingSubThree(sub_root, 7);
+    if(sub_root.SearchElem(7) && (sub_root.SearchElem(6)) && (sub_root.SearchElem(8)) && !sub_root.SearchElem(2)){
+        cout << "ExtractingSubThreeTesting<int> - OK\n";
+    }
+    else{
+        cout << "ExtractingSubThreeTesting<int> - NO\n";
+    }
+    cmp_sub_root.ExtractingSubThree(cmp_sub_root1, v1);
+    if(cmp_sub_root1.SearchElem(v1) && (cmp_sub_root1.SearchElem(v2)) && (cmp_sub_root1.SearchElem(v3)) && !cmp_sub_root1.SearchElem(v21)){
+        cout << "ExtractingSubThreeTesting<cmp> - OK\n";
+    }
+    else{
+        cout << "ExtractingSubThreeTesting<cmp> - NO\n";
+    }
 }
 
 //void map()
@@ -107,11 +120,14 @@ void ThreeTesting(){
     Three<int> root;
     Three<int> root2;
     Three<int> root3;
+    Three<int> sub_root1;
     Three<int> concat_root2;
     Three<cmp> cmp_root;
     Three<cmp> cmp_root2;
     Three<cmp> cmp_concat_root2;
     Three<cmp> cmp_root3;
+    Three<cmp> cmp_sub_root;
+    Three<cmp> cmp_sub_root1;
     cmp v1(5, 3), v2(7, 1), v3(3, 2);
     cmp v21(16, 30), v22(48, 14), v23(5, 12);
     Three<int> map_root;
@@ -182,9 +198,20 @@ void ThreeTesting(){
     where2.Add(v2);
     where2.Add(v22);
     where2.Add(v23);
-    //===================== <sub three>
-    //root.Add(3);
-    //root.Add(1);
+    //===================== <sub three int>
+    sub_root1.Add(4);
+    sub_root1.Add(2);
+    sub_root1.Add(5);
+    sub_root1.Add(7);
+    sub_root1.Add(6);
+    sub_root1.Add(8);
+    //===================== <sub three cmp>
+    cmp_sub_root.Add(v21);
+    cmp_sub_root.Add(v22);
+    cmp_sub_root.Add(v23);
+    cmp_sub_root.Add(v1);
+    cmp_sub_root.Add(v2);
+    cmp_sub_root.Add(v3);
     //===================== <map>
     res_root.Add(16);
     res_root.Add(25);
@@ -239,8 +266,8 @@ void ThreeTesting(){
     else{
         cout << "WhereTesting<cmp> - NO\n";
     }
-
-    //ExtractingSubThreeTesting(root, sub_root);
+    //===================== Sub Three
+    ExtractingSubThreeTesting(sub_root1, sub_root, cmp_sub_root, cmp_sub_root1, v1, v2, v3, v21);
 }
 
 void Tests(){
