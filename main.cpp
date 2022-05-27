@@ -22,9 +22,11 @@ int main() {
     Three<int> root;
     Three<int> root2;
     Three<int> concat_root3;
+    Three<int> sub_root;
     Three<cmp> cmp_root;
     Three<cmp> cmp_root2;
     Three<cmp> cmp_concat_root3;
+    Three<cmp> cmp_sub_root;
     while (flag != 1) {
         cout << "Binary Tree - Possible actions:\n"
                 "-1.Int.\n"
@@ -53,8 +55,9 @@ int main() {
                             "-5.Map.\n"
                             "-6.Where.\n"
                             "-7.Concat.\n"
-                            "-8.Print.\n"
-                            "-9.Exit.\n"
+                            "-8.SubThree for elem.\n"
+                            "-9.Print.\n"
+                            "-10.Exit.\n"
                             "=>";
                     cin >> number;
                     switch (number) {
@@ -100,6 +103,13 @@ int main() {
                             concat_root3.Print(4);
                             break;
                         case 8:
+                            cout << "Enter elem fo sub three:";
+                            cin >> x;
+                            root.ExtractingSubThree(sub_root, x);
+                            cout << "Sub Three:\n\n";
+                            sub_root.Print(4);
+                            break;
+                        case 9:
                             cout << "Choose a bypass option:\n"
                                     "-1.RootLeftRight\n"
                                     "-2.RootRightLeft\n"
@@ -111,7 +121,7 @@ int main() {
                             cin >> key;
                             root.Print(key);
                             break;
-                        case 9:
+                        case 10:
                             cout << "Exit.\n";
                             flag1 = 1;
                             break;
@@ -140,8 +150,9 @@ int main() {
                             "-5.Map.\n"
                             "-6.Where.\n"
                             "-7.Concat.\n"
-                            "-8.Print.\n"
-                            "-9.Exit.\n"
+                            "-8.SubThree for elem.\n"
+                            "-9.Print.\n"
+                            "-10.Exit.\n"
                             "=>";
                     cin >> number;
                     switch (number) {
@@ -188,6 +199,13 @@ int main() {
                             cmp_concat_root3.Print(4);
                             break;
                         case 8:
+                            cout << "Enter elem fo sub three:";
+                            cin >> y;
+                            cmp_root.ExtractingSubThree(cmp_sub_root, y);
+                            cout << "Sub Three:\n\n";
+                            cmp_sub_root.Print(4);
+                            break;
+                        case 9:
                             cout << "Choose a bypass option:\n"
                                     "-1.RootLeftRight\n"
                                     "-2.RootRightLeft\n"
@@ -199,7 +217,7 @@ int main() {
                             cin >> key;
                             cmp_root.Print(key);
                             break;
-                        case 9:
+                        case 10:
                             cout << "Exit.\n";
                             flag2 = 1;
                             break;
